@@ -13,4 +13,5 @@ Package.onUse(function(api) {
 
 	api.addFiles('server.js', 'server');
 	api.addFiles('client.js', 'client');
+	// api.('mentions.js', 'client');
 });

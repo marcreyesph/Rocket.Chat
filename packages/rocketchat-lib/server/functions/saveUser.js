@@ -1,4 +1,7 @@
 /* globals Gravatar */
+import _ from 'underscore';
+import s from 'underscore.string';
+
 RocketChat.saveUser = function(userId, userData) {
 	const user = RocketChat.models.Users.findOneById(userId);
 	const existingRoles = _.pluck(RocketChat.authz.getRoles(), '_id');
@@ -73,7 +76,7 @@ RocketChat.saveUser = function(userId, userData) {
 			}
 		};
 
-		if (userData.requirePasswordChange) {
+		if (typeof userData.requirePasswordChange !== 'undefined') {
 			updateUser.$set.requirePasswordChange = userData.requirePasswordChange;
 		}
 
@@ -140,6 +143,10 @@ RocketChat.saveUser = function(userId, userData) {
 			RocketChat.setUsername(userData._id, userData.username);
 		}
 
+		if (userData.name) {
+			RocketChat.setRealName(userData._id, userData.name);
+		}
+
 		if (userData.email) {
 			RocketChat.setEmail(userData._id, userData.email);
 		}
@@ -152,15 +159,11 @@ RocketChat.saveUser = function(userId, userData) {
 			$set: {}
 		};
 
-		if (userData.name) {
-			updateUser.$set.name = userData.name;
-		}
-
 		if (userData.roles) {
 			updateUser.$set.roles = userData.roles;
 		}
 
-		if (userData.requirePasswordChange) {
+		if (typeof userData.requirePasswordChange !== 'undefined') {
 			updateUser.$set.requirePasswordChange = userData.requirePasswordChange;
 		}
 

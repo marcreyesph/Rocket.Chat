@@ -7,7 +7,6 @@ Package.describe({
 
 Package.onUse(function(api) {
 	api.use([
-		'underscore',
 		'ecmascript',
 		'rocketchat:lib',
 		'nimble:restivus'
@@ -17,8 +16,10 @@ Package.onUse(function(api) {
 	api.addFiles('server/settings.js', 'server');
 
 	//Register v1 helpers
+	api.addFiles('server/v1/helpers/requestParams.js', 'server');
 	api.addFiles('server/v1/helpers/getPaginationItems.js', 'server');
 	api.addFiles('server/v1/helpers/getUserFromParams.js', 'server');
+	api.addFiles('server/v1/helpers/isUserFromParams.js', 'server');
 	api.addFiles('server/v1/helpers/parseJsonQuery.js', 'server');
 	api.addFiles('server/v1/helpers/getLoggedInUser.js', 'server');
 
@@ -32,6 +33,7 @@ Package.onUse(function(api) {
 	//Add v1 routes
 	api.addFiles('server/v1/channels.js', 'server');
 	api.addFiles('server/v1/chat.js', 'server');
+	api.addFiles('server/v1/commands.js', 'server');
 	api.addFiles('server/v1/groups.js', 'server');
 	api.addFiles('server/v1/im.js', 'server');
 	api.addFiles('server/v1/integrations.js', 'server');
